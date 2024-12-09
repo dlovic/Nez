@@ -1,6 +1,7 @@
 <Project>	
 	<PropertyGroup>
 		<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<LangVersion>13</LangVersion>
 	</PropertyGroup>
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 	
@@ -10,7 +11,7 @@
 		<OutputType>Library</OutputType>
 		<RootNamespace>Nez.ImGuiTools</RootNamespace>
 		<AssemblyName>Nez.ImGui</AssemblyName>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

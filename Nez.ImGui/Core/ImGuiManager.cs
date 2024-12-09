@@ -22,6 +22,7 @@ namespace Nez.ImGuiTools
 		public bool FocusGameWindowOnRightClick = false;
 		public bool DisableKeyboardInputWhenGameWindowUnfocused = true;
 		public bool DisableMouseWheelWhenGameWindowUnfocused = true;
+		public bool EnableDocking = false;
 
 		List<Type> _sceneSubclasses = new List<Type>();
 		System.Reflection.MethodInfo[] _themes;
@@ -77,6 +78,9 @@ namespace Nez.ImGuiTools
 		/// </summary>
 		void LayoutGui()
 		{
+			if (EnableDocking)
+				ImGui.DockSpaceOverViewport(ImGui.GetMainViewport(), ImGuiDockNodeFlags.PassthruCentralNode);
+			
 			if (ShowMenuBar)
 				DrawMainMenuBar();
 
