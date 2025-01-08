@@ -24,11 +24,11 @@ namespace Nez.ImGuiTools
 		readonly int _vertexDeclarationSize;
 
 		byte[] _vertexData;
-		VertexBuffer _vertexBuffer;
+		DynamicVertexBuffer _vertexBuffer;
 		int _vertexBufferSize;
 
 		byte[] _indexData;
-		IndexBuffer _indexBuffer;
+		DynamicIndexBuffer _indexBuffer;
 		int _indexBufferSize;
 
 		// Textures
@@ -327,7 +327,7 @@ namespace Nez.ImGuiTools
 				_vertexBuffer?.Dispose();
 
 				_vertexBufferSize = (int)(drawData.TotalVtxCount * 1.5f);
-				_vertexBuffer = new VertexBuffer(Core.GraphicsDevice, _vertexDeclaration, _vertexBufferSize,
+				_vertexBuffer = new DynamicVertexBuffer(Core.GraphicsDevice, _vertexDeclaration, _vertexBufferSize,
 					BufferUsage.None);
 				_vertexData = new byte[_vertexBufferSize * _vertexDeclarationSize];
 			}
@@ -337,7 +337,7 @@ namespace Nez.ImGuiTools
 				_indexBuffer?.Dispose();
 
 				_indexBufferSize = (int)(drawData.TotalIdxCount * 1.5f);
-				_indexBuffer = new IndexBuffer(Core.GraphicsDevice, IndexElementSize.SixteenBits, _indexBufferSize,
+				_indexBuffer = new DynamicIndexBuffer(Core.GraphicsDevice, IndexElementSize.SixteenBits, _indexBufferSize,
 					BufferUsage.None);
 				_indexData = new byte[_indexBufferSize * sizeof(ushort)];
 			}
@@ -364,8 +364,8 @@ namespace Nez.ImGuiTools
 			}
 
 			// Copy the managed byte arrays to the gpu vertex- and index buffers
-			_vertexBuffer.SetData(_vertexData, 0, drawData.TotalVtxCount * _vertexDeclarationSize);
-			_indexBuffer.SetData(_indexData, 0, drawData.TotalIdxCount * sizeof(ushort));
+			_vertexBuffer.SetData(_vertexData, 0, drawData.TotalVtxCount * _vertexDeclarationSize, SetDataOptions.Discard);
+			_indexBuffer.SetData(_indexData, 0, drawData.TotalIdxCount * sizeof(ushort), SetDataOptions.Discard);
 		}
 
 		unsafe void RenderCommandLists(ImDrawDataPtr drawData)
